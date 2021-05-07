@@ -1,0 +1,143 @@
+{
+	"name": "vsregex",
+	"displayName": "VSRegex",
+	"description": "Create and test regular expression.",
+	"version": "0.1.0",
+	"publisher": "vsregex",
+	"repository": "https://github.com/StevenCyb/VSRegex",
+	"engines": {
+		"vscode": "^1.55.0"
+	},
+	"categories": [
+		"Testing",
+		"Education",
+		"Visualization",
+		"Programming Languages"
+	],
+	"activationEvents": [
+		"onCommand:vsregex.version",
+		"onView:vsregex-sidebar"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "vsregex.explain",
+				"category": "VSRegex",
+				"title": "Explain",
+				"icon": {
+					"light": "assets/light/explain.svg",
+					"dark": "assets/dark/explain.svg"
+				}
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "vsregex-sidebar-view",
+					"title": "VSRegex",
+					"icon": "assets/icon.svg"
+				}
+			]
+		},
+		"views": {
+			"vsregex-sidebar-view": [
+				{
+					"type": "webview",
+					"id": "vsregex-sidebar",
+					"name": "VSRegex",
+					"icon": "assets/icon.svg",
+					"contextualTitle": "VSRegex"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "vsregex.explain",
+					"when": "view == vsregex-sidebar",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+			"title": "VSRegex",
+			"properties": {
+				"VSRegex.backgroundColor": {
+					"type": "string",
+					"pattern": "^(#[a-fA-F0-9]{6})$",
+					"patternErrorMessage": "Color must be in hex format #123456",
+					"default": "#5a9282",
+					"description": "Background color for matches"
+				},
+				"VSRegex.backgroundColorOpacity": {
+					"type": "number",
+					"default": 80,
+					"minimum": 0,
+					"maximum": 100,
+					"description": "Background color opacity for matches"
+				},
+				"VSRegex.color": {
+					"type": "string",
+					"pattern": "^(#[a-fA-F0-9]{6})$",
+					"patternErrorMessage": "Color must be in hex format #123456",
+					"default": "#eeeeee",
+					"description": "Font color for matches"
+				},
+				"VSRegex.outlineColor": {
+					"type": "string",
+					"pattern": "^(#[a-fA-F0-9]{6})$",
+					"patternErrorMessage": "Color must be in hex format #123456",
+					"default": "#5a9282",
+					"description": "Outline hex color for matches"
+				},
+				"VSRegex.outlineColorOpacity": {
+					"type": "number",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 100,
+					"description": "Background color opacity for matches"
+				},
+				"VSRegex.outlineStyle": {
+					"type": "string",
+					"enum": [
+						"dotted",
+						"dashed",
+						"solid",
+						"double",
+						"groove",
+						"ridge",
+						"inset",
+						"outset"
+					],
+					"default": "solid",
+					"description": "Outline style for matches"
+				},
+				"VSRegex.outlineWidth": {
+					"type": "number",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 10,
+					"description": "Outline px width for matches"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run package",
+		"compile": "tsc -p ./",
+		"lint": "eslint . --ext .ts,.tsx",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^15.0.2",
+		"@types/vscode": "^1.55.0",
+		"@typescript-eslint/eslint-plugin": "^4.22.1",
+		"@typescript-eslint/parser": "^4.22.1",
+		"eslint": "^7.25.0"
+	},
+	"dependencies": {
+		"tsc-watch": "^4.2.9",
+		"typescript": "^4.2.4"
+	}
+}
