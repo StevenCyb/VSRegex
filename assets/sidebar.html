@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="style-src {{csp.source}};">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="{{reset.css}}" rel="stylesheet">
+	<link href="{{vscode.css}}" rel="stylesheet">
+	<link href="{{sidebar.css}}" rel="stylesheet">
+</head>
+<body>
+	<h3 class="separator">RegExp</h3>
+
+	<label class="checkbox">//g - global
+		<input type="checkbox" checked="checked" id="regex-option-g">
+		<span class="checkmark"></span>
+	</label>
+	<label class="checkbox">//i - case insensitive
+		<input type="checkbox" id="regex-option-i">
+		<span class="checkmark"></span>
+	</label>
+	<label class="checkbox">//m - multiline
+		<input type="checkbox" id="regex-option-m">
+		<span class="checkmark"></span>
+	</label>
+	<label class="checkbox">//y - sticky
+		<input type="checkbox" id="regex-option-y">
+		<span class="checkmark"></span>
+	</label>
+	
+  <input id="regex-input" type="text" placeholder="/.*/g">
+	<p id ="webview-error"></p>
+	
+	<h3 class="separator">Matches</h3>
+	<ul id="result-tree"></ul>
+
+	<script src="{{sidebar.js}}"></script>
+</body>
+</html>
