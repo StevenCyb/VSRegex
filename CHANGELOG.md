@@ -1,5 +1,5 @@
 # Change Log
 
 ## [Unreleased]
-
-- Initial release
+- Add flag u and s
+- Initial Commit

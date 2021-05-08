@@ -2,7 +2,9 @@ const tsVscode = acquireVsCodeApi();
 
 var regexOptionG = document.getElementById('regex-option-g');
 var regexOptionI = document.getElementById('regex-option-i');
-var regexOptionM = document.getElementById('regex-option-m');
+var regexOptionM = document.getElementById('regex-option-m')
+var regexOptionU = document.getElementById('regex-option-u')
+var regexOptionS = document.getElementById('regex-option-s');
 var regexOptionY = document.getElementById('regex-option-y');
 var regexInput = document.getElementById('regex-input');
 
@@ -13,6 +15,8 @@ regexInput.addEventListener('input', update);
 regexOptionG.addEventListener('change', update);
 regexOptionI.addEventListener('change', update);
 regexOptionM.addEventListener('change', update);
+regexOptionU.addEventListener('change', update);
+regexOptionS.addEventListener('change', update);
 regexOptionY.addEventListener('change', update);
 
 let updateTimeout = null;
@@ -23,6 +27,8 @@ function update() {
   var options = (regexOptionG.checked ? 'g' : '') +
                 (regexOptionI.checked ? 'i' : '') +
                 (regexOptionM.checked ? 'm' : '') +
+                (regexOptionU.checked ? 'u' : '') +
+                (regexOptionS.checked ? 's' : '') +
                 (regexOptionY.checked ? 'y' : '');
 
   updateTimeout = setTimeout(function() {
