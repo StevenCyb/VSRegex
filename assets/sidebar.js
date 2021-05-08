@@ -7,8 +7,6 @@ var regexOptionU = document.getElementById('regex-option-u')
 var regexOptionS = document.getElementById('regex-option-s');
 var regexOptionY = document.getElementById('regex-option-y');
 var regexInput = document.getElementById('regex-input');
-
-var webviewError = document.getElementById('webview-error');
 var resultTree = document.getElementById('result-tree');
 
 regexInput.addEventListener('input', update);
@@ -32,12 +30,11 @@ function update() {
                 (regexOptionY.checked ? 'y' : '');
 
   updateTimeout = setTimeout(function() {
-    webviewError.innerHTML = '';
 
     if(options == '') {
       resultTree.innerHTML = '';
       tsVscode.postMessage({type: 'clearRegex'});
-      webviewError.innerHTML = 'Select at least on checkbox option';
+      tsVscode.postMessage({type: 'onError', message: 'Select at least on checkbox option'});
       return; 
     }
 
@@ -46,31 +43,9 @@ function update() {
       tsVscode.postMessage({type: 'clearRegex'});
       return; 
     }
-  
-    var err = checkRegExp(value, options);
-    if(err != null) {
-      webviewError.innerHTML = err;
-      return;
-    }
 
     tsVscode.postMessage({type: 'updateRegex', regex: value, options: options});
   }, 500);
-}
-
-function checkRegExp(regexString, options) {
-  try {
-    return new Function(`
-      "use strict";
-      try {
-          new RegExp('${regexString}', '${options}');
-          return null;
-      } catch (e) {
-          return e;
-      }
-    `)();
-  } catch(e) {
-      return e;
-  }
 }
 
 window.addEventListener('message', event => {
