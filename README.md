@@ -18,6 +18,7 @@ Use it to...
 - add explain webview that explain the regex by diagram and text (material: https://code.visualstudio.com/api/extension-guides/webview)
 - bugfix random VS Code crash
 - publish 0.2.0-alpha (material: https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
+- Improve sidebar ui with collapse fields like on regex101
 - check if possible/useful to build a drag drop regex builder
 
 
