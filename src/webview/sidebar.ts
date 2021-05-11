@@ -31,11 +31,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
    */ 
   public resolveWebviewView(webviewView: vscode.WebviewView) {
     const placeholderValues = new Map<string, any>();
-    placeholderValues.set('reset.css', utils.getAssetURI(this.context, webviewView, 'reset.css'));
-    placeholderValues.set('vscode.css', utils.getAssetURI(this.context, webviewView, 'vscode.css'));
-    placeholderValues.set('sidebar.css', utils.getAssetURI(this.context, webviewView, 'sidebar.css'));
+    placeholderValues.set('reset.css', utils.getAssetURI(this.context, webviewView.webview, 'reset.css'));
+    placeholderValues.set('vscode.css', utils.getAssetURI(this.context, webviewView.webview, 'vscode.css'));
+    placeholderValues.set('sidebar.css', utils.getAssetURI(this.context, webviewView.webview, 'sidebar.css'));
     placeholderValues.set('csp.source', webviewView.webview.cspSource);
-    placeholderValues.set('sidebar.js', utils.getAssetURI(this.context, webviewView, 'sidebar.js'));
+    placeholderValues.set('sidebar.js', utils.getAssetURI(this.context, webviewView.webview, 'sidebar.js'));
     
     webviewView.webview.options = {
       enableScripts: true,

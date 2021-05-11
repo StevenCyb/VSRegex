@@ -8,15 +8,18 @@ import { SidebarProvider } from './webview/sidebar';
  */
 export class RegexHandler {
   lock:boolean;
+  regexString:string;
   regex?:RegExp; 
   decorationType:vscode.TextEditorDecorationType; 
 
   /**
    * Constructor of the class.
    * @param {vscode.ExtensionContext}
+   * @param {SidebarProvider}
    */ 
    constructor(context:vscode.ExtensionContext, private sidebarProvider:SidebarProvider) {
     this.lock = false;
+    this.regexString = '';
 
     const configMap = config.ConfigurationToMap();
     this.decorationType = vscode.window.createTextEditorDecorationType({
@@ -139,6 +142,7 @@ export class RegexHandler {
   public Set(regexString:string, options:string) {
     try {
       this.regex = new RegExp(regexString, options);
+      this.regexString = regexString;
       
       this.onDocumentChanged(null);
     } catch(err) {

@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 	sidebarProvider.setRegexHandler(regexHandler);
 
 	// Register commands
-	context.subscriptions.push(ExplainCommand());
+	context.subscriptions.push(ExplainCommand(context, regexHandler, sidebarProvider));
 
 	// Register sidebar
   context.subscriptions.push(
