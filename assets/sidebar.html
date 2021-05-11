@@ -24,13 +24,20 @@
 		<input type="checkbox" id="regex-option-m">
 		<span class="checkmark"></span>
 	</label>
+	<label class="checkbox">//s - single line
+		<input type="checkbox" id="regex-option-s">
+		<span class="checkmark"></span>
+	</label>
+	<label class="checkbox">//u - unicode
+		<input type="checkbox" id="regex-option-u">
+		<span class="checkmark"></span>
+	</label>
 	<label class="checkbox">//y - sticky
 		<input type="checkbox" id="regex-option-y">
 		<span class="checkmark"></span>
 	</label>
 	
-  <input id="regex-input" type="text" placeholder="/.*/g">
-	<p id ="webview-error"></p>
+  <input id="regex-input" type="text" placeholder=".*">
 	
 	<h3 class="separator">Matches</h3>
 	<ul id="result-tree"></ul>

@@ -23,8 +23,8 @@ function getURI(context:vscode.ExtensionContext, filename:string): vscode.Uri {
  * @param {string} filename
  * @returns {vscode.Uri}
  */
-function getAssetURI(context:vscode.ExtensionContext, view:vscode.WebviewView, filename:string): vscode.Uri {
-  return view.webview.asWebviewUri(getURI(context, filename));
+function getAssetURI(context:vscode.ExtensionContext, webview:vscode.Webview, filename:string): vscode.Uri {
+  return webview.asWebviewUri(getURI(context, filename));
 }
 
 /**

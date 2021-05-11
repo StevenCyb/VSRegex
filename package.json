@@ -15,7 +15,7 @@
 		"Programming Languages"
 	],
 	"activationEvents": [
-		"onCommand:vsregex.version",
+		"onCommand:vsregex.explain",
 		"onView:vsregex-sidebar"
 	],
 	"main": "./out/extension.js",

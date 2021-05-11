@@ -1,21 +1,12 @@
 # VSRegex
-This is a VS Code extension to test and create regular expressions. 
-Use it to...
+This is a VS Code extension to test and create regular expressions.
 
-<table>
-	<tr>
-		<th>... test in praxis.</th>
-		<th>... understand the patter.</th>
-	</tr>
-	<tr>
-		<td><img src="media/search.jpg" style="max-height: 400px;"></td>
-		<!-- TODO update image with new feature -->
-		<td><img src="media/search.jpg" style="max-height: 400px;"></td> 
-	</tr>
-</table>
+![Preview](preview.jpg)
 
 ## Roadmap
-- add explain webview that explain the regex by diagram and text (material: https://code.visualstudio.com/api/extension-guides/webview)
-- bugfix random VS Code crash
+- add webview with hints (list + diagrams to illustrate)
+- add some code commentaries
 - publish 0.2.0-alpha (material: https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
-- check if possible/useful to build a drag drop regex builder
+
+## Third Party
+The rendering part is a [library](https://github.com/StevenCyb/regexper-lib) I have created based on the implementation [regexper-static by Jeff Avallone](https://gitlab.com/javallone/regexper-static). He has worked out a cool regular expression visualization [site](https://regexper.com/), check it out. The license for his project can be found [here](https://gitlab.com/javallone/regexper-static/-/blob/master/LICENSE.txt).

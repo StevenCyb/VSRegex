@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="style-src {{csp.source}};">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="{{reset.css}}" rel="stylesheet">
+	<link href="{{vscode.css}}" rel="stylesheet">
+	<link href="{{explain.css}}" rel="stylesheet">
+</head>
+<body>
+  <div id="progress">0.00%</div> 
+
+  <div id="zoom">
+    <svg id="diagram"></svg>
+  </div>
+
+	<script>
+		const expression = String.raw`{{regex_string}}`;
+	</script>
+	<script src="{{regexper-lib.js}}"></script>
+	<script src="{{explain.js}}"></script>
+</body>
+</html>
