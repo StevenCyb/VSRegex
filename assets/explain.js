@@ -1,31 +1,7 @@
 const tsVscode = acquireVsCodeApi();
 
-// Rendering stuff
 var svg = document.getElementById('diagram'),
     progress = document.getElementById('progress');
-
-new RegexperLib.Parser(
-  svg, 
-  function(isLoading) {
-    if(!isLoading) {
-      svg.style.opacity = '1';
-      progress.style.opacity = '0';
-
-      setTimeout(function(){
-        progress.remove();
-      }, 1000)
-    }
-  }, 
-  function(progressPercentage) {
-      progress.innerHTML = `${progressPercentage}%`;
-  })
-  .parse(expression)
-  .then(parser => {
-    parser.render();
-  })
-  .catch(err => {
-    tsVscode.postMessage({type: 'onError', message: err.message});
-  });
 
 // Interaction stuff
 var scale = 1,
@@ -70,3 +46,43 @@ zoom.onwheel = function (e) {
 
   setTransform();
 }
+
+function fitZoom() {
+  setTimeout(function() {
+    var svgRect = svg.getBBox();
+  
+    var fitScale = Math.min(
+      zoom.offsetHeight / svgRect.height,
+      zoom.offsetWidth / svgRect.width,
+    );
+
+    scale = fitScale; 
+    setTransform();
+  }, 100)
+}
+
+// Rendering stuff
+new RegexperLib.Parser(
+  svg, 
+  function(isLoading) {
+    if(!isLoading) {
+      fitZoom();
+
+      svg.style.opacity = '1';
+      progress.style.opacity = '0';
+
+      setTimeout(function(){
+        progress.remove();
+      }, 1000)
+    }
+  }, 
+  function(progressPercentage) {
+      progress.innerHTML = `${progressPercentage}%`;
+  })
+  .parse(expression)
+  .then(parser => {
+    parser.render();
+  })
+  .catch(err => {
+    tsVscode.postMessage({type: 'onError', message: err.message});
+  });

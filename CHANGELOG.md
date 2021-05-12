@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- Add autoscaling on rendered svg
 - Add yo and generator-code to package.json
 - Add explain webview
 - Move error checking to extension and add lock (changes prevent crash bug)
