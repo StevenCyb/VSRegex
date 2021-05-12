@@ -38,7 +38,7 @@ export class ExplainProvider {
       context.subscriptions
     );
 
-    this.webviewView.webview.onDidReceiveMessage(async (data) => {
+    this.webviewView.webview.onDidReceiveMessage(async (data:any) => {
       switch (data.type) {
         case 'onError': {
           if (!data.message) {
