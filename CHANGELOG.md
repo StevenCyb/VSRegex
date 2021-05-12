@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- Add yo and generator-code to package.json
 - Add explain webview
 - Move error checking to extension and add lock (changes prevent crash bug)
 - Add issuer and feature request templates

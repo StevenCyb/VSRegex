@@ -47,7 +47,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     this.webviewView = webviewView;
 
 
-    webviewView.webview.onDidReceiveMessage(async (data) => {
+    webviewView.webview.onDidReceiveMessage(async (data:any) => {
       switch (data.type) {
         case 'clearRegex': {
           if(this.regexHandler != undefined) {

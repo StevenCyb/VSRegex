@@ -1,8 +1,8 @@
 const tsVscode = acquireVsCodeApi();
 
 // Rendering stuff
-var svg = document.getElementById('diagram');
-var progress = document.getElementById('progress');
+var svg = document.getElementById('diagram'),
+    progress = document.getElementById('progress');
 
 new RegexperLib.Parser(
   svg, 

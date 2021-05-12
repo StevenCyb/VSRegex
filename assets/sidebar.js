@@ -1,13 +1,13 @@
 const tsVscode = acquireVsCodeApi();
 
-var regexOptionG = document.getElementById('regex-option-g');
-var regexOptionI = document.getElementById('regex-option-i');
-var regexOptionM = document.getElementById('regex-option-m')
-var regexOptionU = document.getElementById('regex-option-u')
-var regexOptionS = document.getElementById('regex-option-s');
-var regexOptionY = document.getElementById('regex-option-y');
-var regexInput = document.getElementById('regex-input');
-var resultTree = document.getElementById('result-tree');
+var regexOptionG = document.getElementById('regex-option-g'),
+    regexOptionI = document.getElementById('regex-option-i'),
+    regexOptionM = document.getElementById('regex-option-m'),
+    regexOptionU = document.getElementById('regex-option-u'),
+    regexOptionS = document.getElementById('regex-option-s'),
+    regexOptionY = document.getElementById('regex-option-y'),
+    regexInput = document.getElementById('regex-input'),
+    resultTree = document.getElementById('result-tree');
 
 regexInput.addEventListener('input', update);
 regexOptionG.addEventListener('change', update);

@@ -134,7 +134,9 @@
 		"@types/vscode": "^1.55.0",
 		"@typescript-eslint/eslint-plugin": "^4.22.1",
 		"@typescript-eslint/parser": "^4.22.1",
-		"eslint": "^7.25.0"
+		"eslint": "^7.25.0",
+		"generator-code": "^1.4.16",
+		"yo": "^4.1.0"
 	},
 	"dependencies": {
 		"tsc-watch": "^4.2.9",

@@ -14,9 +14,11 @@ body {
   left: calc(50vw - 54px);
   top: calc(50vh - 23px);
 	text-align: center;
-	font-size: 40px;
   width: 108px;
   height: 46px;
+	opacity: 1;
+	transition: opacity 1s;
+	font-size: 40px;
 	font-weight: bold;
 	color: var(--vscode-textLink-activeForeground);
 }
