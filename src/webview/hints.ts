@@ -23,7 +23,7 @@ export class HintsProvider {
     );
 
     this.webviewView.webview.options = {
-      enableScripts: true, // TODO remove if no scripts
+      enableScripts: true, 
       localResourceRoots: [this.context.extensionUri],
     };
     
@@ -79,6 +79,6 @@ export class HintsProvider {
     placeholderValues.set('hints-data.js', utils.getAssetURI(this.context, this.webviewView.webview, 'hints-data.js'));
     placeholderValues.set('csp.source', this.webviewView.webview.cspSource);
 
-    this.webviewView.webview.html = utils.getHTML(this.context, 'hint.html', placeholderValues);
+    this.webviewView.webview.html = utils.getHTML(this.context, 'hints.html', placeholderValues);
   }
 }

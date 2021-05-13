@@ -1,6 +1,4 @@
 import * as vscode from 'vscode';
-import { RegexHandler } from "../regex-handler";
-import { SidebarProvider } from '../webview/sidebar';
 import { HintsProvider } from '../webview/hints';
 
 // Create reference to currently shown webview

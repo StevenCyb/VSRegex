@@ -1,0 +1,35 @@
+.hint-wrapper {
+  width: 100%;
+  padding: 20px 0 10px 0;
+  border-bottom: solid 2px var(--vscode-button-background);
+}
+
+.hint-title {
+  font-weight: bold;
+}
+
+.hint-tags-wrapper {
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.hint-tag {
+  margin-left: 5px;
+  padding: 0 5px;
+  border-radius: 999em;
+  color: var(--vscode-button-foreground);
+  background-color: var(--vscode-textLink-activeForeground);
+  cursor: pointer;
+}
+
+.hint-description {
+  padding-bottom: 8px;
+}
+
+.hint-expression {
+  outline: 1px solid transparent;
+  outline-offset: 2px !important;
+  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  color: var(--vscode-button-foreground);
+  background: var(--vscode-button-background);
+}
