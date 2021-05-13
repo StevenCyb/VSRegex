@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { SidebarProvider } from "./webview/sidebar";
 import { RegexHandler } from "./regex-handler";
 import { ExplainCommand } from "./command/explain";
+import { HintsCommand } from "./command/hints";
 
 /**
  * Is called on extension activate.
@@ -15,6 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Register commands
 	context.subscriptions.push(ExplainCommand(context, regexHandler, sidebarProvider));
+	context.subscriptions.push(HintsCommand(context));
 
 	// Register sidebar
   context.subscriptions.push(
