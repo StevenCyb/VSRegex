@@ -257,17 +257,103 @@ createEntry(
   ['T' + highlight('e') + 'l' + highlight('e') + 'kom ' + highlight('c') + 'olor is h' + highlight('e') + 'x = #' + highlight('e20074')],
 );
 
+createEntry(true, 'Flags and Modifiers');
 createEntry(
-  false, '',
-  ['letter', 'classes'],
-  highlight(bold('')) + '' + bold(' ') + '.',
+  false, 'Global mode',
+  ['flag', 'modifiers', 'global', 'mode'],
+  highlight(bold('//g')) + ' Global mode - engine do not stop after the first match.',
+  '/example/g',
+  ['This ' + highlight('example') + ' is a simple ' + highlight('example') + '.'],
+);
+createEntry(
+  false, 'Multiline mode',
+  ['flag', 'modifiers', 'multiline', 'mode'],
+  highlight(bold('//m')) + ' Multiline mode - engine evaluate each line respectively. With ' + bold('//g') + ' a beginning ' + bold('^') + ' will count for each line.',
+  '/^\\d*/gm',
+  [highlight('01234'), 'hello', highlight('123')],
+);
+createEntry(
+  false, 'Case insensitive mode',
+  ['flag', 'modifiers', 'case', 'insensitive', 'mode'],
+  highlight(bold('//i')) + ' Case insensitive mode - engine do not interpret letter case.',
+  '/[a-z]*/i',
+  [highlight('exampleUPPERCASE')],
+);
+createEntry(
+  false, 'Extended mode',
+  ['flag', 'modifiers', 'extended', 'mode'],
+  highlight(bold('//x')) + ' Extended mode - engine ignore whitespace. Space character can be used by escaping it e.g. ' + bold('"\ "') + '.',
+  '/[a-z]*/x',
+  [highlight('example') + ' ' + highlight('with') + ' ' + highlight('space')],
+);
+createEntry(
+  false, 'Single line mode',
+  ['flag', 'modifiers', 'single', 'line', 'mode'],
+  highlight(bold('//s')) + ' Single line mode - engine let ' + bold('.') + ' (dot) match also newlines.',
+  '/01.23/s',
+  [highlight('01'), highlight('23'), '45'],
+);
+createEntry(
+  false, 'Unicode mode',
+  ['flag', 'modifiers', 'unicode', 'mode'],
+  highlight(bold('//u')) + ' Pattern will be treated as UTF-16, so unicode will be included in ' + bold('[a-zA-Z]') + ' and ' + bold('\\w') + '.',
+  '/\w*/gu',
+  [highlight('hello') + ' ' + highlight('cześć')],
+);
+createEntry(
+  false, 'Non-greedy mode',
+  ['flag', 'non', 'greedy', 'mode'],
+  highlight(bold('//U')) + ' Engine will do greedy instead of lazy matching.' + bold(' ') + '.',
+  '/a+/U',
+  [highlight('a') + 'aa'],
+);
+createEntry(
+  false, 'Anchor mode',
+  ['flag', 'anchor', 'mode'],
+  highlight(bold('//A')) + ' Force pattern to become anchored at start or at the position of the last successful match. Equivalent to ' + bold('\\G') + '.',
+  '/\\w*/Ag',
+  [highlight('abc') + ' abc'],
+);
+createEntry(
+  false, 'Duplicate group names mode',
+  ['flag', 'duplicate', 'group', 'name', 'mode'],
+  highlight(bold('//J')) + ' Allows to define duplicate pattern names. Each captured group still has its own ID.',
+  '/(?<name>\\w*)(?<name>\\w*)/Jg',
+  [highlight('first_name') + ' ' + highlight('second_name')],
+);
+
+createEntry(true, 'Modes');
+createEntry(
+  false, 'Newline',
+  ['general', 'newline'],
+  highlight(bold('\\n')) + ' Matches a newline character.',
+  '',
+  [''],
+);
+createEntry(
+  false, 'Carriage return',
+  ['general', 'carriage', 'return'],
+  highlight(bold('\\r')) + ' Matches a carriage return (U+2185).',
+  '',
+  [''],
+);
+createEntry(
+  false, 'Tab',
+  ['general', 'tab'],
+  highlight(bold('\\t')) + ' Matches a tab character.',
+  '',
+  [''],
+);
+createEntry(
+  false, 'Null character',
+  ['general', 'null', 'character'],
+  highlight(bold('\\0')) + ' Matches a null character (U+2400).',
   '',
   [''],
 );
 
-createEntry(true, 'Flags and Modifiers');
+createEntry(true, '');
 
-// TODO general tokens
 // TODO Group Contructs
 // TODO meta sequence
 // TODO quantifiers
@@ -279,9 +365,9 @@ createEntry(true, 'Flags and Modifiers');
 createEntry(true, '');
 createEntry(
   false, '',
-  [],
-  bold('') + ' .',
+  ['letter', 'classes'],
+  highlight(bold('')) + '' + bold(' ') + '.',
   '',
-  [],
+  [''],
 );
 */

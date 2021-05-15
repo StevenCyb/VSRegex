@@ -46,21 +46,22 @@ for(var i=0; i < hintsData.length; i++) {
   description.classList.add('hint-description');
   wrapper.appendChild(description);
 
-  var expression = document.createElement('div');
-  expression.innerHTML = 
-    `<span class="bold">Example-Expression:</span><br>${
-      hintsData[i].expression
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;")
-    }<br><span class="bold">Result (/.../gm):</span><br>${
-      hintsData[i].example.join('<br>')
-    }`;
-  expression.classList.add('hint-expression');
-
-  wrapper.appendChild(expression);
+  if(hintsData[i].expression != '') {
+    var expression = document.createElement('div');
+    expression.innerHTML = 
+      `<span class="bold">Example-Expression:</span><br>${
+        hintsData[i].expression
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+      }<br><span class="bold">Result (/.../gm):</span><br>${
+        hintsData[i].example.join('<br>')
+      }`;
+    expression.classList.add('hint-expression');
+    wrapper.appendChild(expression);
+  }
 }
 
 function filter() {
