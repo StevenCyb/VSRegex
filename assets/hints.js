@@ -64,16 +64,27 @@ for(var i=0; i < hintsData.length; i++) {
 }
 
 function filter() {
-  var therms = search.value.toLowerCase().split(' ');
+  var therms = search.value.toLowerCase().split(' '),
+      lastGroupTitle = null;
 
   for(var i=0; i < hintsData.length; i++) {
-    hintsData[i].ref.style.display = 'block';
+    hintsData[i].ref.style.display = hintsData[i].isSeparator ? 'none' : 'block';
+
+    if(hintsData[i].isSeparator) {
+      lastGroupTitle = hintsData[i].ref;
+      continue;
+    }
 
     for(var j=0; j < therms.length; j++) {
       if(!hintsData[i].searchable.includes(therms[j])) {
         hintsData[i].ref.style.display = 'none';
         break;
       }
+    } 
+    
+    if(lastGroupTitle != null && hintsData[i].ref.style.display == 'block') {
+      lastGroupTitle.style.display = 'block';
+      lastGroupTitle = null;
     }
   }
 }

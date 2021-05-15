@@ -42,5 +42,6 @@
 }
 
 .highlight {
+  background-color: rgba(0, 0, 0, 0.2);
   color: var(--vscode-textLink-activeForeground);
 }

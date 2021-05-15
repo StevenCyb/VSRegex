@@ -166,16 +166,107 @@ createEntry(
   [highlight('0') + '.' + highlight('a') + '-' + highlight('2') + '_' + highlight('b') + '#'],
 );
 createEntry(
-  false, '',
-  ['letter', 'classes'],
-  highlight(bold('')) + ' .',
-  '',
-  [],
+  false, 'Letters',
+  ['letter', 'letter', 'classes'],
+  highlight(bold('[[:alpha:]]')) + ' Match any letter, alternative to ' + bold('[a-zA-Z]') + '.',
+  '[[:alpha:]]',
+  ['0.' + highlight('a') + '-2_' + highlight('b') + '#'],
+);
+createEntry(
+  false, 'ASCII code 0-127',
+  ['ascii', '0', '127', 'classes'],
+  highlight(bold('[[:ascii:]]')) + ' Match any character in the valid ASCII range, equivalent to ' + bold('[\\x00-\\x7F]') + '.',
+  '[[:ascii:]]',
+  [highlight('0.a-2_b#') + 'こんにちは'],
+);
+createEntry(
+  false, 'Space or tab only',
+  ['space', 'tab', 'classes'],
+  highlight(bold('[[:blank:]]')) + ' Match any spaces and tabs, equivalent to ' + bold('[ \\t]') + '.',
+  '[[:blank:]]',
+  ['H' + highlight(' ') + 'E' + highlight('	 ') + 'L' + highlight(' ') + 'L' + highlight('	') + 'O'],
+);
+createEntry(
+  false, 'Control characters',
+  ['control', 'character', 'classes'],
+  highlight(bold('[[:cntrl:]]')) + ' Match any characters that are used to control text (newline, tab, etc.). Equivalent to ' + bold('[ \\t]') + '.',
+  '[[:cntrl:]]',
+  ['H E' + highlight('	') + ' L L' + highlight('	') + 'O'],
+);
+createEntry(
+  false, 'Decimal digits',
+  ['decimal', 'number', 'digit', 'classes'],
+  highlight(bold('[[:digit:]]')) + ' Match any decimal digit, equivalent to ' + bold('[0-9]') + '.',
+  '[[:digit:]]',
+  ['one=' + highlight('1') + ', two=' + highlight('2') + ' and three=' + highlight('3')],
+);
+createEntry(
+  false, 'Visible characters',
+  ['visible', 'printable', 'characters', 'classes'],
+  highlight(bold('[[:graph:]]')) + ' Match printable character excluding non whitespace and control. Equivalent to ' + bold('[\\x21-\\x7E]') + '.',
+  '[[:graph:]]',
+  [highlight('one=1,') + ' ' + highlight('two=2') + ' ' + highlight('and') + ' ' + highlight('three=3')],
+);
+createEntry(
+  false, 'Lowercase letters',
+  ['lowercase', 'letters', 'classes'],
+  highlight(bold('[[:lower:]]')) + ' Match any lowercase letter, equivalent to ' + bold('[a-z]') + '.',
+  '[[:lower:]]',
+  [highlight('one') + '=1, ' + highlight('two') + '=2 ' + highlight('and') + ' ' + highlight('three' + '=3')],
+);
+createEntry(
+  false, 'Visible characters',
+  ['printable', 'character', 'classes'],
+  highlight(bold('[[:print:]]')) + ' Match printable character excluding control characters.',
+  '[[:print:]]',
+  [highlight('Number: 123')],
+);
+createEntry(
+  false, 'Visible punctuation characters',
+  ['visible', 'punctuation', 'character', 'classes'],
+  highlight(bold('[[:punct:]]')) + ' Match visible characters that are not whitespace, letters or digits.',
+  '[[:punct:]]',
+  ['a1 ' + highlight('.:;,-_#+')],
+);
+createEntry(
+  false, 'Whitespace',
+  ['whitespace', 'space', 'tab', 'classes'],
+  highlight(bold('[[:space:]]')) + ' Match space and tabs, equivalent to ' + bold('\\s') + '.',
+  '[[:space:]]',
+  ['ID' + highlight('	') + ':' + highlight(' ') + 'A2'],
+);
+createEntry(
+  false, 'Uppercase letters',
+  ['uppercase', 'letter', 'classes'],
+  highlight(bold('[[:upper:]]')) + ' Match any uppercase letter, equivalent to ' + bold('[A-Zy]') + '.',
+  '[[:upper:]]',
+  ['ab1.' + highlight('ABC')],
+);
+createEntry(
+  false, 'Word characters',
+  ['word', 'letter', 'number', 'underscore', 'classes'],
+  highlight(bold('[[:word:]]')) + ' Match any letters, numbers and underscores. Equivalent to ' + bold('\\w') + ' or ' + bold('[a-zA-Z0-9_]') + '.',
+  '[[:word:]]',
+  ['Something_New' + highlight(' #') + '123'],
+);
+createEntry(
+  false, 'Hexadecimal digits',
+  ['hexadecimal', 'digit', 'classes'],
+  highlight(bold('[[:xdigit:]]')) + ' Match hexadecimal digits (case insensitive). Equivalent to ' + bold('[0-9a-fA-F]') + '.',
+  '[[:xdigit:]]',
+  ['T' + highlight('e') + 'l' + highlight('e') + 'kom ' + highlight('c') + 'olor is h' + highlight('e') + 'x = #' + highlight('e20074')],
 );
 
+createEntry(
+  false, '',
+  ['letter', 'classes'],
+  highlight(bold('')) + '' + bold(' ') + '.',
+  '',
+  [''],
+);
 
+createEntry(true, 'Flags and Modifiers');
 
-// TODO Flags/Modifiers
 // TODO general tokens
 // TODO Group Contructs
 // TODO meta sequence
