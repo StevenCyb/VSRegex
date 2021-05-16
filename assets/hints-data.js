@@ -257,6 +257,7 @@ createEntry(
   ['T' + highlight('e') + 'l' + highlight('e') + 'kom ' + highlight('c') + 'olor is h' + highlight('e') + 'x = #' + highlight('e20074')],
 );
 
+// Flags and Modifiers
 createEntry(true, 'Flags and Modifiers');
 createEntry(
   false, 'Global mode',
@@ -322,24 +323,25 @@ createEntry(
   [highlight('first_name') + ' ' + highlight('second_name')],
 );
 
-createEntry(true, 'Modes');
+// General Tokens
+createEntry(true, 'General Tokens');
 createEntry(
   false, 'Newline',
-  ['general', 'newline'],
+  ['general', 'substitution', 'newline'],
   highlight(bold('\\n')) + ' Matches a newline character.',
   '',
   [''],
 );
 createEntry(
   false, 'Carriage return',
-  ['general', 'carriage', 'return'],
+  ['general', 'substitution', 'carriage', 'return'],
   highlight(bold('\\r')) + ' Matches a carriage return (U+2185).',
   '',
   [''],
 );
 createEntry(
   false, 'Tab',
-  ['general', 'tab'],
+  ['general', 'substitution', 'tab'],
   highlight(bold('\\t')) + ' Matches a tab character.',
   '',
   [''],
@@ -354,13 +356,6 @@ createEntry(
 
 createEntry(true, '');
 
-// TODO Group Contructs
-// TODO meta sequence
-// TODO quantifiers
-// TODO Substitution
-
-// TODO common
-
 /*
 createEntry(true, '');
 createEntry(
@@ -371,3 +366,96 @@ createEntry(
   [''],
 );
 */
+// TODO Group Contructs
+
+// TODO meta sequence
+
+// Quantifiers
+createEntry(true, 'Quantifiers');
+createEntry(
+  false, 'Zero or one',
+  ['quantifier', 'zero', 'one'],
+  highlight(bold('x?')) + ' Match ' + bold('x') + ' if exist otherwise not.',
+  'a?1',
+  [highlight('a1') + ' b' + highlight('1')],
+);
+createEntry(
+  false, 'Zero or more',
+  ['quantifier', 'zero', 'more'],
+  highlight(bold('x*')) + ' Match ' + bold('x') + ' as many times as exist.',
+  'a*',
+  [highlight('aaa') + 'b' + highlight('a') + '1' + highlight('aaaaa')],
+);
+createEntry(
+  false, 'One or more',
+  ['quantifier', 'one', 'more'],
+  highlight(bold('x+')) + ' Match ' + bold('x') + ' at least one time.',
+  'a+',
+  [highlight('aaa') + 'b' + highlight('a') + '1' + highlight('aaaaa')],
+);
+createEntry(
+  false, 'Exactly n times',
+  ['quantifier', 'exactly', 'times'],
+  highlight(bold('x{n}')) + ' Match ' + bold('x') + ' exactly ' + bold('n') + ' times.',
+  'a{3}',
+  [highlight('aaa') + ' a aa ' + highlight('aaa') + 'a'],
+);
+createEntry(
+  false, 'At least n times',
+  ['quantifier', 'least', 'times'],
+  highlight(bold('x{n,}')) + ' Match ' + bold('x') + ' at least ' + bold('n') + ' times.',
+  'a{3,}',
+  [highlight('aaa') + ' a aa ' + highlight('aaaa')],
+);
+createEntry(
+  false, 'Between n and m times',
+  ['quantifier', 'between', 'times'],
+  highlight(bold('x{n,m}')) + ' Match ' + bold('x') + ' between ' + bold('n') + ' and ' + bold('m') + '.',
+  'a{1,2}',
+  [highlight('aaa') + ' a aa ' + highlight('aaaa') + 'aa'],
+);
+createEntry(
+  false, 'Greedy quantifier',
+  ['quantifier', 'greedy'],
+  highlight(bold('a*')) + ' Matches as many characters as possible.',
+  'a.*a',
+  ['This c' + highlight('an be da') + 'ngerous'],
+);
+createEntry(
+  false, 'Lazy quantifier',
+  ['quantifier', 'lazy'],
+  highlight(bold('a*?')) + ' Matches as few characters as possible.',
+  'a\\w*?',
+  ['This c' + highlight('a') + 'n be d' + highlight('a') + 'ngerous'],
+);
+createEntry(
+  false, 'Possessive quantifier',
+  ['quantifier', 'possessive'],
+  highlight(bold('a*?')) + ' Matches as many characters as possible.',
+  'a\w*+',
+  ['This c' + highlight('an') + ' be d' + highlight('angerous')],
+);
+
+// Substitution
+createEntry(true, 'Substitution');
+createEntry(
+  false, 'Capture group content by index',
+  ['substitution', 'capture', 'group', 'content', 'index'],
+  highlight(bold('$n')) + ' Return content of the ' + bold('n') + 'th captured group.',
+  '',
+  [''],
+);
+createEntry(
+  false, 'Capture group content by id',
+  ['substitution', 'capture', 'group', 'content', 'id'],
+  highlight(bold('${id}')) + ' Return content of captured group with ' + bold('id') + '.',
+  '',
+  [''],
+);
+createEntry(
+  false, 'From feed',
+  ['substitution', 'from', 'feed'],
+  highlight(bold('\\f')) + ' Metacharacter is used to find a form feed character..',
+  '',
+  [''],
+);
