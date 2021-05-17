@@ -33,6 +33,11 @@ function highlight(s) {
   return `<span class="highlight">${s}</span>`;
 }
 
+function comment(s) {
+  // TODO add commentRangeForeground to css with class comment
+  return `<span class="comment">${s}</span>`;
+}
+
 // Anchors
 createEntry(true, 'Anchors');
 createEntry(
@@ -304,7 +309,7 @@ createEntry(
 createEntry(
   false, 'Non-greedy mode',
   ['flag', 'non', 'greedy', 'mode'],
-  highlight(bold('//U')) + ' Engine will do greedy instead of lazy matching.' + bold(' ') + '.',
+  highlight(bold('//U')) + ' Engine will do greedy instead of lazy matching.',
   '/a+/U',
   [highlight('a') + 'aa'],
 );
@@ -354,21 +359,168 @@ createEntry(
   [''],
 );
 
-createEntry(true, '');
-
+createEntry(true, 'Group constructs');
+createEntry(
+  false, 'Non-capturing group',
+  ['group', 'construct', 'non', 'capturing', 'group'],
+  highlight(bold('(?:...)')) + ' Match a non-capturing group to apply quantifiers without capture/assign an ID.',
+  '(?:\\d{1,3}\\.){3}\\d{1,3}',
+  [highlight('127.0.0.1') + ' ' + comment('// single match without group')],
+);
+createEntry(
+  false, 'Capturing group',
+  ['group', 'construct', 'capturing', 'group'],
+  highlight(bold('(...)')) + ' Isolates part of the full match to be later referred to by ID.',
+  '(ID: (\\d+))',
+  [highlight('ID: 123') + ' ' + comment('// 123 is captured in group 1')],
+);
+createEntry(
+  false, 'Atomic group (non-capturing)',
+  ['group', 'construct', 'atomic', 'non', 'capturing', 'group'],
+  highlight(bold('(?>...)')) + ' Matches the longest possible substring in the non-capturing group.',
+  'atomic(?>.+)',
+  ['This is ' + highlight('atomic capturing')],
+);
+createEntry(
+  false, 'Reset subpattern group number',
+  ['group', 'construct', 'duplicate', 'reset', 'subpattern', 'number'],
+  highlight(bold('(?|...)')) + ' Prevent all following enclosed capture group from incrementing ID.',
+  '(?|(a)|(b)|(c))',
+  [highlight('a') + ' ' + highlight('b') + ' ' + highlight('c') + comment(' // three matches with a single group')],
+);
+createEntry(
+  false, 'Named capturing group',
+  ['group', 'construct', 'named', 'capturing', 'group'],
+  highlight(bold('(?\'id\'...)')) + ' Give a capturing group an ' + bold('id') + '. Equivalent to ' + bold('(?<id>...)') + ' and ' + bold('(?P<id>...)'),
+  '(?\'age\'\\d+)',
+  ['My age is: ' + highlight('123') + comment(' // captured group has the id \'age\'')],
+);
+createEntry(
+  false, 'Named capturing group',
+  ['group', 'construct', 'named', 'capturing', 'group'],
+  highlight(bold('(?<id>...)')) + ' Give a capturing group an ' + bold('id') + '. Equivalent to ' + bold('(?\'id\'...') + ' and ' + bold('(?P<id>...)'),
+  '(?<age>\\d+)',
+  ['My age is: ' + highlight('123') + comment(' // captured group has the id \'age\'')],
+);
+createEntry(
+  false, 'Named capturing group',
+  ['group', 'construct', 'named', 'capturing', 'group'],
+  highlight(bold('(?P<id>...)')) + ' Give a capturing group an ' + bold('id') + '. Equivalent to ' + bold('(?\'id\'...') + ' and ' + bold('(?<id>...)'),
+  '(?P<age>\\d+)',
+  ['My age is: ' + highlight('123') + comment(' // captured group has the id \'age\'')],
+);
+createEntry(
+  false, 'Inline modifiers for flags/modes',
+  ['group', 'construct', 'inline', 'modifier', 'flag', 'mode'],
+  highlight(bold('(?x)')) + ' or ' + highlight(bold('(?-x)')) + ' Modifies the flags/modes for a while expression. Where '  + bold('x')  + ' are any flag/mode. Unset can be done with a ' + bold('-') + ' prefix.',
+  'a(?i)b',
+  [highlight('ab') + ' ' + highlight('aB')],
+);
+createEntry(
+  false, 'Localized inline modifiers',
+  ['group', 'construct', 'localized', 'inline', 'modifier', 'flag', 'mode'],
+  highlight(bold('(?x:...)')) + ' or ' + highlight(bold('(?-x:...)')) + ' Modifies the flags/modes for enclosed expression. Where '  + bold('x')  + ' are any flag/mode. Unset can be done with a ' + bold('-') + ' prefix.',
+  'a(?i:b)c',
+  [highlight('abc') + ' abC ' + highlight('aBc') + ' aBC'],
+);
+createEntry(
+  false, 'Conditional statement',
+  ['group', 'construct', 'conditional', 'statement'],
+  highlight(bold('(?(n)x|y)')) + ' If the previously captured group ' + bold('n') + ' matches, the pattern ' + bold('x') + ' is matched. Otherwise, the pattern ' + bold('y') + ' is matched.',
+  '(Banana is )(?(1)fruit|vegetable)',
+  [highlight('Banana is fruit') + ' | vegetable.'],
+);
+createEntry(
+  false, 'Recursive conditional statement',
+  ['group', 'construct', 'recursive', 'conditional', 'statement'],
+  highlight(bold('(?(R)x|y)')) + ' On a match of the full pattern, match ' + bold('x') + ' else ' + bold('y') + '.',
+  '<(?:(?(R)\\w+|[^<>]*)|(?R))*>',
+  [highlight('<tag a="1" b="2" <tag> />') + ' and not this >'],
+);
+createEntry(
+  false, 'Lookahead condition',
+  ['group', 'construct', 'lookahead', 'condition'],
+  highlight(bold('(?(?=x)y|z)')) + ' If lookahead ' + bold('x') + ' succeeds, match ' + bold('y') + ' else ' + bold('z') + '. Global flag breaks conditionals.',
+  '(?(?=a)a fruit|or vegetable)',
+  ['Banana is ' + highlight('a fruit') + ' or vegetable'],
+);
+createEntry(
+  false, 'Lookbehind condition',
+  ['group', 'construct', 'lookbehind', 'condition'],
+  highlight(bold('(?(?<=x)y|z)')) + ' If lookbehind  ' + bold('x') + ' succeeds, match ' + bold('y') + ' else ' + bold('z') + '. Global flag breaks conditionals.',
+  '(?(?<=a)a fruit|or vegetable)',
+  ['Banana is a fruit ' + highlight('or vegetable') + comment(' // of course it is not')],
+);
+createEntry(
+  false, 'Recursive entire pattern',
+  ['group', 'construct', 'recursive', 'entire', 'pattern'],
+  highlight(bold('(?R)')) + ' Recursively match the entire expression.',
+  '<(?:[^<>]|(?R))+>',
+  [highlight('<tag empty="true"/><tag with="inner" <tag>/>') + comment(' // Match 1 contains "<tag empty="true"/>" and match 2 "<tag with="inner" <tag>/>"')],
+);
+createEntry(
+  false, 'Recursive first pattern',
+  ['group', 'construct', 'recursive', 'first', 'pattern'],
+  highlight(bold('(?1)')) + ' Recursively match the first capture group.',
+  '(dogs).+(?1)',
+  [highlight('dogs like other dogs') + ' but not always cats' + comment(' // first group contains the first "dog" the second the second "dog"')],
+);
+createEntry(
+  false, 'Recurse relative subpattern',
+  ['group', 'construct', 'recursive', 'relative', 'subpattern'],
+  highlight(bold('(?+n)')) + ' Recurse the ' + bold('n') + 'th capture group following the current position in the expression.',
+  '(?+1).+(match)',
+  [highlight('match if I start with match')],
+);
+createEntry(
+  false, 'Recurse subpattern by id',
+  ['group', 'construct', 'recursive', 'id', 'subpattern'],
+  highlight(bold('(?&id)')) + ' Recursively match captured with ' + bold('id') + '. It is not required that the group with given ' + bold('id') + ' is defined before.',
+  '(?&noun) and not (?\'noun\'(d|tr)uck)',
+  [highlight('duck and not truck')],
+);
+createEntry(
+  false, 'Match subpattern by id',
+  ['group', 'construct', 'match', 'subpattern', 'id', 'before'],
+  highlight(bold('(?&id)')) + ' Recursively match captured with ' + bold('id') + '. It is required that the group with given ' + bold('id') + ' is defined before.',
+  '(?P<animal>duck) (?P=animal)',
+  [highlight('duck duck') + ' go'],
+);
+createEntry(
+  false, 'Recurse subpattern with id',
+  ['group', 'construct', 'match', 'subpattern', 'id'],
+  highlight(bold('(?P>id)')) + ' Recursively matches the given named subpattern or capture group.',
+  '((?P>alphabet)) or (?<alphabet>[a-z]+)',
+  [highlight('abc or xyz')],
+);
+createEntry(
+  false, 'Define pattern/variable',
+  ['group', 'construct', 'define', 'pattern', 'variable'],
+  highlight(bold('(?(DEFINE)(?\'x\'...)')) + ' The ' + bold('DEFINE') + ' group is ignored for the match and is treated as a variable with name ' + bold('x') + '. After definition it can be used with ' + bold('(?P>x)') + '.',
+  '(?(DEFINE)(?\'field\'[0-9]+))(?P>field)\.(?P>field)\.(?P>field)\.(?P>field)',
+  [highlight('127.0.0.1')],
+);
 /*
-createEntry(true, '');
+// TODO Group Cons
 createEntry(
   false, '',
-  ['letter', 'classes'],
+  ['group', 'construct'],
+  highlight(bold('()')) + ' .',
+  '',
+  [],
+);
+*/
+
+createEntry(true, 'Meta sequence');
+createEntry(
+  false, '',
+  ['meta', 'sequence'],
   highlight(bold('')) + '' + bold(' ') + '.',
   '',
   [''],
 );
-*/
-// TODO Group Contructs
-
 // TODO meta sequence
+// TODO https://code.visualstudio.com/api/references/theme-color
 
 // Quantifiers
 createEntry(true, 'Quantifiers');
