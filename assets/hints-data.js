@@ -34,11 +34,13 @@ function highlight(s) {
 }
 
 function comment(s) {
-  // TODO add commentRangeForeground to css with class comment
   return `<span class="comment">${s}</span>`;
 }
 
-// Anchors
+
+/*
+ * Anchors
+ */
 createEntry(true, 'Anchors');
 createEntry(
   false, 'Start of match',
@@ -98,7 +100,9 @@ createEntry(
 );
 
 
-// Character classes
+/*
+ * Character classes
+ */
 createEntry(true, 'Classes');
 createEntry(
   false, 'Letters of set',
@@ -262,7 +266,10 @@ createEntry(
   ['T' + highlight('e') + 'l' + highlight('e') + 'kom ' + highlight('c') + 'olor is h' + highlight('e') + 'x = #' + highlight('e20074')],
 );
 
-// Flags and Modifiers
+
+/*
+ * Flags and Modifiers
+ */
 createEntry(true, 'Flags and Modifiers');
 createEntry(
   false, 'Global mode',
@@ -328,7 +335,10 @@ createEntry(
   [highlight('first_name') + ' ' + highlight('second_name')],
 );
 
-// General Tokens
+
+/*
+ * General Tokens
+ */
 createEntry(true, 'General Tokens');
 createEntry(
   false, 'Newline',
@@ -500,17 +510,136 @@ createEntry(
   '(?(DEFINE)(?\'field\'[0-9]+))(?P>field)\.(?P>field)\.(?P>field)\.(?P>field)',
   [highlight('127.0.0.1')],
 );
-/*
-// TODO Group Cons
 createEntry(
-  false, '',
-  ['group', 'construct'],
-  highlight(bold('()')) + ' .',
+  false, 'Positive lookahead',
+  ['group', 'construct', 'positive', 'lookahead'],
+  highlight(bold('(?=x)')) + ' Assert that the given subpattern ' + bold('x') + ' can be matched without being included in the match.',
+  'this(?=only)',
+  [highlight('this') + 'only', 'thisnot'],
+);
+createEntry(
+  false, 'Negative lookahead',
+  ['group', 'construct', 'negative', 'lookahead'],
+  highlight(bold('(?!x)')) + ' Assert that the given subpattern ' + bold('x') + ' will not match.',
+  'this(?!not)',
+  [highlight('this') + 'only', 'thisnot'],
+);
+createEntry(
+  false, 'Positive lookbehind',
+  ['group', 'construct', 'positive', 'lookbehind'],
+  highlight(bold('(?<=x)')) + ' Assert that the given subpattern ' + bold('x') + ' can be matched before, without being included in the match. The pattern must have a fixed width.',
+  '(?<=only )this',
+  ['only ' + highlight('this'), 'not this'],
+);
+createEntry(
+  false, 'Negative lookbehind',
+  ['group', 'construct', 'negative', 'lookbehind'],
+  highlight(bold('(?<!x)')) + ' Assert that the given subpattern ' + bold('x') + ' will not match before. The pattern must have a fixed width.',
+  '(?<!not )this',
+  ['only ' + highlight('this'), 'not this'],
+);
+createEntry(
+  false, 'Control verb accept',
+  ['group', 'construct', 'control', 'verb', 'accept'],
+  highlight(bold('(*ACCEPT)')) + ' Engine end successfully on matching this verb (skip the rest).',
+  'A(?:B|C(*ACCEPT))CD',
+  [highlight('ABCD'), highlight('AC') + 'D'],
+);
+createEntry(
+  false, 'Control verb fail',
+  ['group', 'construct', 'control', 'verb', 'fail'],
+  highlight(bold('(*FAIL)')) + ' Force the match to fail on matching this verb. Alternatively written as ' + bold('(*F)') + '.',
+  'A(?:B|C(*FAIL))',
+  [highlight('AB') + 'CD', 'ACD'],
+);
+createEntry(
+  false, 'Control verb mark|skip',
+  ['group', 'construct', 'control', 'verb', 'mark', 'skip'],
+  highlight(bold('(*MARK:id)')) + ' This verb is used either on its own or in conjunction. When the verb is used by itself, multiple marks can be defined and later used to determine the path the engine has used. When the verb is used in conjunction with ' + bold('(*SKIP)') + ' ',
+  'ABC(*MARK:letters)123(*SKIP:letters)',
+  ['ABC' + highlight('123')],
+);
+createEntry(
+  false, 'Control verb commit',
+  ['group', 'construct', 'control', 'verb', 'commit'],
+  highlight(bold('(*COMMIT)')) + ' This verb stop the match of the rest on matching this verb.',
+  '\\d(*COMMIT)[A-Z]*',
+  [highlight('123') + '#ABC'],
+);
+createEntry(
+  false, 'Control verb prune',
+  ['group', 'construct', 'control', 'verb', 'prune'],
+  highlight(bold('(*PRUNE)')) + ' Exit the regex tries to backtrack past that contain this verb.',
+  '(*PRUNE)A|B',
+  [highlight('A') + ' B'],
+);
+createEntry(
+  false, 'Control verb skip',
+  ['group', 'construct', 'control', 'verb', 'skip'],
+  highlight(bold('(*SKIP)')) + ' End the match if regex tries to backtrack past that contain this verb. Can be used to cut down on backtracking.',
+  'A(*SKIP)B',
+  [highlight('AAB') + ' AAAB AA' + highlight('AAB') + ' AAAAAB'],
+);
+createEntry(
+  false, 'Control verb then',
+  ['group', 'construct', 'control', 'verb', 'then'],
+  highlight(bold('(*THEN)')) + ' Disallows backtracking past ' + bold('(*THEN)') + ' position, and gives up matching the current alternation if there is a failure. If instead ' + bold('(*THEN)') + ' is used outside of an alternation, it will act like ' + bold('(*PRUNE)') + '.',
+  '(COND1(*THEN) FOO|COND2(*THEN) BAR|COND3(*THEN) BAZ)',
+  [highlight('CCOND1 FOO') + ' COND2BAR ' + highlight('COND3 BAZ')],
+);
+createEntry(
+  false, 'Pattern modifier UTF',
+  ['group', 'construct', 'property', 'modifier', 'utf', '8', '16', '32'],
+  highlight(bold('(*UTFx)')) + ' Sets the property mode to UTF-' + bold('x') + '. Where ' + bold('x') + ' is one of ' + bold('{8,16,32}') + '.',
+  '', [],
+);
+createEntry(
+  false, 'Pattern modifier UCP',
+  ['group', 'construct', 'property', 'modifier', 'ucp'],
+  highlight(bold('(*UCP)')) + ' UCP (Unicode Character Properties) makes the engine extend ' + bold('\\B') + ', ' + bold('\\b') + ', ' + bold('\\D') + ', ' + bold('\\d') + ', ' + bold('\\S') + ', ' + bold('\\s') + ', ' + bold('\\W') + ', ' + bold('\\w') + ' and some POSIX character classes to include unicode characters, by side of ASCII.',
+  '(*UCP)\\d+',
+  [highlight('1١2٢3')],
+);
+createEntry(
+  false, 'Line break modifier',
+  ['group', 'construct', 'line', 'break', 'modifier'],
+  highlight(bold('(*CR)')) + ' Only carriage return character is considered as a line break.',
   '',
   [],
 );
-*/
+createEntry(
+  false, 'Unix line break modifier',
+  ['group', 'construct', 'unix', 'line', 'break', 'modifier'],
+  highlight(bold('(*LF)')) + ' Only line feed character is considered as a line break (common on UNIX).',
+  '',
+  [],
+);
+createEntry(
+  false, 'Windows line break modifier',
+  ['group', 'construct', 'windows', 'line', 'break', 'modifier'],
+  highlight(bold('(*CRLF)')) + ' Only carriage return followed by a line feed characters considered as a line break (common on Windows).',
+  '',
+  [],
+);
+createEntry(
+  false, 'Line break modifier',
+  ['group', 'construct', 'line', 'break', 'modifier'],
+  highlight(bold('(*ANYCRLF)')) + ' Either a carriage return character or a line feed character, or the two in sequence are considered a line break.',
+  '',
+  [],
+);
+createEntry(
+  false, 'Line break modifier',
+  ['group', 'construct', 'line', 'break', 'modifier'],
+  highlight(bold('(*ANY)')) + ' Any unicode newline character or sequence is treated as line break.',
+  '',
+  [],
+);
 
+
+/*
+ * Meta sequence
+ */
 createEntry(true, 'Meta sequence');
 createEntry(
   false, '',
@@ -522,7 +651,10 @@ createEntry(
 // TODO meta sequence
 // TODO https://code.visualstudio.com/api/references/theme-color
 
-// Quantifiers
+
+/*
+ * Quantifiers
+ */
 createEntry(true, 'Quantifiers');
 createEntry(
   false, 'Zero or one',
@@ -588,7 +720,10 @@ createEntry(
   ['This c' + highlight('an') + ' be d' + highlight('angerous')],
 );
 
-// Substitution
+
+/*
+ * Substitution
+ */
 createEntry(true, 'Substitution');
 createEntry(
   false, 'Capture group content by index',

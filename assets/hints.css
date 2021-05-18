@@ -45,3 +45,7 @@
   background-color: rgba(0, 0, 0, 0.2);
   color: var(--vscode-textLink-activeForeground);
 }
+
+.comment {
+  color: #5a9282 !important;
+}
