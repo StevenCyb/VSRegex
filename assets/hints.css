@@ -1,0 +1,51 @@
+.hint-wrapper {
+  width: 100%;
+  padding: 20px 0 10px 0;
+  border-bottom: solid 2px var(--vscode-button-background);
+}
+
+.hint-title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.hint-tags-wrapper {
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.hint-tag {
+  margin-left: 5px;
+  padding: 0 5px 2.5px 5px;
+  border-radius: 999em;
+  color: var(--vscode-button-foreground);
+  background-color: var(--vscode-input-background);
+  cursor: pointer;
+}
+
+.hint-description {
+  padding-top: 3px;
+  padding-bottom: 8px;
+}
+
+.hint-expression {
+  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  padding-left: 10px !important;
+  outline: 1px solid transparent;
+  outline-offset: 2px !important;
+  color: var(--vscode-button-foreground);
+  background-color: var(--vscode-button-background);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.highlight {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--vscode-textLink-activeForeground);
+}
+
+.comment {
+  color: #5a9282 !important;
+}

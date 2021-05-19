@@ -16,6 +16,7 @@
 	],
 	"activationEvents": [
 		"onCommand:vsregex.explain",
+		"onCommand:vsregex.hints",
 		"onView:vsregex-sidebar"
 	],
 	"main": "./out/extension.js",
@@ -28,6 +29,15 @@
 				"icon": {
 					"light": "assets/light/explain.svg",
 					"dark": "assets/dark/explain.svg"
+				}
+			},
+			{
+				"command": "vsregex.hints",
+				"category": "VSRegex",
+				"title": "Regex Hints",
+				"icon": {
+					"light": "assets/light/question.svg",
+					"dark": "assets/dark/question.svg"
 				}
 			}
 		],
@@ -55,6 +65,11 @@
 			"view/title": [
 				{
 					"command": "vsregex.explain",
+					"when": "view == vsregex-sidebar",
+					"group": "navigation"
+				},
+				{
+					"command": "vsregex.hints",
 					"when": "view == vsregex-sidebar",
 					"group": "navigation"
 				}

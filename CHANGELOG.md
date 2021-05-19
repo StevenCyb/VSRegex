@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- Add hint webview
 - Add autoscaling on rendered svg
 - Add yo and generator-code to package.json
 - Add explain webview
