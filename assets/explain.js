@@ -1,5 +1,7 @@
+// Create instance of vs code api
 const tsVscode = acquireVsCodeApi();
 
+// Create reference to existing html elements
 var svg = document.getElementById('diagram'),
     progress = document.getElementById('progress');
 
@@ -11,20 +13,24 @@ var scale = 1,
     start = { x: 0, y: 0 },
     zoom = document.getElementById("zoom");
 
+// Apply transformation on svg 
 function setTransform() {
   zoom.style.transform = "translate(" + pointX + "px, " + pointY + "px) scale(" + scale + ")";
 }
 
+// Start interaction
 zoom.onmousedown = function (e) {
   e.preventDefault();
   start = { x: e.clientX - pointX, y: e.clientY - pointY };
   panning = true;
 }
 
+// End interaction
 zoom.onmouseup = function (e) {
   panning = false;
 }
 
+// Move view on drag
 zoom.onmousemove = function (e) {
   e.preventDefault();
   if (!panning) {
@@ -35,6 +41,7 @@ zoom.onmousemove = function (e) {
   setTransform();
 }
 
+// Listen for mousewheel to zoom in/out
 zoom.onwheel = function (e) {
   e.preventDefault();
   var xs = (e.clientX - pointX) / scale,
@@ -47,6 +54,7 @@ zoom.onwheel = function (e) {
   setTransform();
 }
 
+// Try to fit diagram to parent content
 function fitZoom() {
   setTimeout(function() {
     var svgRect = svg.getBBox();

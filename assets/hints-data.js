@@ -1,5 +1,6 @@
 var hintsData = [];
 
+// Helper function to construct hint object
 function createEntry(
     isSeparator, 
     title, 
@@ -7,18 +8,20 @@ function createEntry(
     description='', 
     expression='', 
     example=[]) {
-  hintsData.push({
-    isSeparator: isSeparator,
-    title: title,
-    tags: tags,
-    description: description,
-    expression: expression,
-    example: example,
-    ref: null,
-    searchable: ''
-  });
+    hintsData.push({
+      isSeparator: isSeparator,
+      title: title,
+      tags: tags,
+      description: description,
+      expression: expression,
+      example: example,
+      ref: null,
+      searchable: ''
+    }
+  );
 }
 
+// Helper to colorize something in bold
 function bold(s) {
   s = s
     .replace(/&/g, "&amp;")
@@ -29,15 +32,17 @@ function bold(s) {
   return `<span class="bold">${s}</span>`;
 }
 
+// Helper to colorize something highlighted
 function highlight(s) {
   return `<span class="highlight">${s}</span>`;
 }
 
+// Helper to colorize something as comment
 function comment(s) {
   return `<span class="comment">${s}</span>`;
 }
 
-
+// Now some stupid amount of hints
 /*
  * Anchors
  */
