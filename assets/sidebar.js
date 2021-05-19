@@ -1,5 +1,7 @@
+// Create instance of vs code api
 const tsVscode = acquireVsCodeApi();
 
+// Create reference to existing html elements
 var regexOptionG = document.getElementById('regex-option-g'),
     regexOptionI = document.getElementById('regex-option-i'),
     regexOptionM = document.getElementById('regex-option-m'),
@@ -9,6 +11,7 @@ var regexOptionG = document.getElementById('regex-option-g'),
     regexInput = document.getElementById('regex-input'),
     resultTree = document.getElementById('result-tree');
 
+// Add listener to checkboxes to trigger update
 regexInput.addEventListener('input', update);
 regexOptionG.addEventListener('change', update);
 regexOptionI.addEventListener('change', update);
@@ -17,10 +20,13 @@ regexOptionU.addEventListener('change', update);
 regexOptionS.addEventListener('change', update);
 regexOptionY.addEventListener('change', update);
 
+// Do update if last interaction was after 500ms
 let updateTimeout = null;
 function update() {
+  // Clear timeout if pending
   clearTimeout(updateTimeout);
 
+  // Get regex values
   var value = regexInput.value;
   var options = (regexOptionG.checked ? 'g' : '') +
                 (regexOptionI.checked ? 'i' : '') +
@@ -29,8 +35,9 @@ function update() {
                 (regexOptionS.checked ? 's' : '') +
                 (regexOptionY.checked ? 'y' : '');
 
+  // Set new timeout to prevent multiple calls on text input
   updateTimeout = setTimeout(function() {
-
+    // Check if values are not empty
     if(options == '') {
       resultTree.innerHTML = '';
       tsVscode.postMessage({type: 'clearRegex'});
@@ -38,20 +45,25 @@ function update() {
       return; 
     }
 
-    if(value == "") {
+    if(value == '') {
       resultTree.innerHTML = '';
       tsVscode.postMessage({type: 'clearRegex'});
       return; 
     }
 
+    // Send regex data to extension
     tsVscode.postMessage({type: 'updateRegex', regex: value, options: options});
   }, 500);
 }
 
+// Listen for incoming messages
 window.addEventListener('message', event => {
   switch (event.data.type) {
     case 'documentMatches':
+      // Display matches
       var newResultTreeContent = '';
+
+      // Loop through matches
       event.data.data.forEach(element => {
         var filename = String(element.filename);
         if(filename.indexOf('/') != -1) {
@@ -60,6 +72,7 @@ window.addEventListener('message', event => {
           filename = filename.split('\\').pop();
         }
 
+        // Create tree view out of match 
         newResultTreeContent += `<li>`;
         newResultTreeContent += `<span class="tree-title tree-title-down">${filename}</span>`;
         newResultTreeContent += `<ul class="nested active">`;
@@ -82,6 +95,7 @@ window.addEventListener('message', event => {
         newResultTreeContent += `</li>`;
       });
 
+      // Add toggle listener to tree title elements
       resultTree.innerHTML = newResultTreeContent;
       var toggleElements = document.getElementsByClassName('tree-title');
       for(var i=0; i < toggleElements.length; i++) {

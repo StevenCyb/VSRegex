@@ -4,7 +4,6 @@ This is a VS Code extension to test and create regular expressions.
 ![Preview](preview.jpg)
 
 ## Roadmap
-- add some code commentaries
 - publish 0.2.0-alpha (material: https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
 
 ## Third Party
