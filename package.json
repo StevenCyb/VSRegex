@@ -3,8 +3,11 @@
 	"displayName": "VSRegex",
 	"description": "Create and test regular expression.",
 	"version": "0.1.0",
-	"publisher": "vsregex",
+	"publisher": "stevencyb",
 	"repository": "https://github.com/StevenCyb/VSRegex",
+	"license": "Apache License Version 2.0",
+	"markdown": "github",
+	"icon": "https://raw.githubusercontent.com/StevenCyb/VSRegex/44fab00d7b8bff17f6682abeb2cd86c18fa99bb9/assets/icon.png?token=AJZPBMX7FRMVR65L7QGIHF3AUVSX2",
 	"engines": {
 		"vscode": "^1.55.0"
 	},
@@ -13,6 +16,10 @@
 		"Education",
 		"Visualization",
 		"Programming Languages"
+	],
+	"keywords": [
+		"vsregex",
+		"regex"
 	],
 	"activationEvents": [
 		"onCommand:vsregex.explain",
