@@ -3,8 +3,21 @@
 	"displayName": "VSRegex",
 	"description": "Create and test regular expression.",
 	"version": "0.1.0",
-	"publisher": "vsregex",
-	"repository": "https://github.com/StevenCyb/VSRegex",
+	"publisher": "StevenCyb",
+	"homepage": "https://github.com/StevenCyb/VSRegex",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/StevenCyb/VSRegex"
+	},
+	"bugs": {
+		"url": "https://github.com/StevenCyb/VSRegex/issues"
+	},
+	"license": "Apache License Version 2.0",
+	"author": {
+		"name": "Steven Cybinski"
+	},
+	"markdown": "github",
+	"icon": "assets/icon.png",
 	"engines": {
 		"vscode": "^1.55.0"
 	},
@@ -13,6 +26,10 @@
 		"Education",
 		"Visualization",
 		"Programming Languages"
+	],
+	"keywords": [
+		"vsregex",
+		"regex"
 	],
 	"activationEvents": [
 		"onCommand:vsregex.explain",
@@ -151,9 +168,13 @@
 		"@typescript-eslint/parser": "^4.22.1",
 		"eslint": "^7.25.0",
 		"generator-code": "^1.4.16",
-		"yo": "^4.1.0"
+		"npm": "^7.14.0",
+		"vsce": "^1.88.0",
+		"yo": "^4.1.0",
+		"vscode": "^1.1.37"
 	},
 	"dependencies": {
+		"node": "^16.1.0",
 		"tsc-watch": "^4.2.9",
 		"typescript": "^4.2.4"
 	}
