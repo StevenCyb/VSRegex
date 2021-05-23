@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+- Add feature to restore expression after switching bar index
+- Fix local debugging 
 - Add pipeline to deploy releases to vs marketplace
 - Add hint webview
 - Add autoscaling on rendered svg
