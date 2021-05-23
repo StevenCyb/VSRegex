@@ -155,11 +155,11 @@
 		}
 	},
 	"scripts": {
-		"vscode:prepublish": "webpack --mode production",
-		"webpack": "webpack --mode development",
-		"webpack-dev": "webpack --mode development --watch",
+		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./"
+		"watch": "tsc -watch -p ./",
+		"webpack": "webpack --mode development",
+		"webpack-dev": "webpack --mode development --watch"
 	},
 	"devDependencies": {
 		"@types/node": "^15.0.2",
