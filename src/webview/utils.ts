@@ -5,14 +5,14 @@ import * as path from 'path';
 export { getAssetURI, getHTML }
 
 /**
- * Get URI of file in assets.
+ * Get URI of file in resources.
  * @param {vscode.ExtensionContext} context
  * @param {string} filename
  * @returns {vscode.Uri}
  */
 function getURI(context:vscode.ExtensionContext, filename:string): vscode.Uri {
   return vscode.Uri.file(
-    path.join(context.extensionPath, 'assets', filename)
+    path.join(context.extensionPath, 'resources', filename)
   );
 }
 

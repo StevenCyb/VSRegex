@@ -1,5 +1,3 @@
-//@ts-check
-
 'use strict';
 
 const path = require('path');
@@ -13,9 +11,10 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'extension.js',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
+    devtoolModuleFilenameTemplate: '../[resource-path]'
   },
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   externals: {
     vscode: 'commonjs vscode'
   },
@@ -26,12 +25,8 @@ const config = {
     rules: [
       {
         test: /\.ts$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'ts-loader'
-          }
-        ]
+        use: 'ts-loader',
+        exclude: /node_modules/
       }
     ]
   }
