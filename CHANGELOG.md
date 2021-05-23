@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- Update pipeline to force tag format
 - Bugfix- try to use out instead of dist and compile using tsc
 - Bugfix- package corrupted due dist excluded
 - Add feature to restore expression after switching bar index
