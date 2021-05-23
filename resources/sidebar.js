@@ -59,7 +59,15 @@ function update() {
 // Listen for incoming messages
 window.addEventListener('message', event => {
   switch (event.data.type) {
+    case 'setExpression':
+      regexInput.value = event.data.data;
+      update();
+    break;
     case 'documentMatches':
+      if(event.data.data.forEach == undefined) {
+        return;
+      }
+
       // Display matches
       var newResultTreeContent = '';
 
@@ -107,3 +115,6 @@ window.addEventListener('message', event => {
       break;
   }
 });
+
+// Request stored expression
+tsVscode.postMessage({type: 'getExpression'});

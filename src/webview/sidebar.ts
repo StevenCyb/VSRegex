@@ -68,6 +68,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           }
           break;
         }
+        case 'getExpression': {
+          if(this.webviewView != undefined && this.regexHandler != undefined) {
+            this.webviewView.webview.postMessage({type: 'setExpression', data: this.regexHandler.regexString});
+          }
+        }
         case 'onError': {
           if (!data.message) {
             return;
