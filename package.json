@@ -35,7 +35,7 @@
 		"onCommand:vsregex.hints",
 		"onView:vsregex-sidebar"
 	],
-	"main": "./dist/extension.js",
+	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
