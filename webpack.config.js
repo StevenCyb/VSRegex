@@ -9,7 +9,7 @@ const config = {
 
   entry: './src/extension.ts',
   output: {
-    path: path.resolve(__dirname, ''),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'extension.js',
     libraryTarget: 'commonjs2',
     devtoolModuleFilenameTemplate: '../[resource-path]'
