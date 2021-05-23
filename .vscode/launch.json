@@ -15,9 +15,7 @@
 			"outFiles": [
 				"${workspaceFolder}/out/**/*.js"
 			],
-			"stopOnEntry": false,
-			"sourceMaps": true,
-			"preLaunchTask": "npm: watch"
+			"preLaunchTask": "${defaultBuildTask}"
 		}
 	]
 }
