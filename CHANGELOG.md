@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- Bugfix- try to use out instead of dist
 - Bugfix- package corrupted due dist excluded
 - Add feature to restore expression after switching bar index
 - Fix local debugging 
