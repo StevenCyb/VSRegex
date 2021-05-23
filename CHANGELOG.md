@@ -1,6 +1,7 @@
 # Change Log
 
 ## [Unreleased]
+- Bugfix- package corrupted due dist excluded
 - Add feature to restore expression after switching bar index
 - Fix local debugging 
 - Add pipeline to deploy releases to vs marketplace
