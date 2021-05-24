@@ -26,3 +26,4 @@ jobs:
         with:
           name: extension
           path: ./artefacts
+          retention-days: 2
