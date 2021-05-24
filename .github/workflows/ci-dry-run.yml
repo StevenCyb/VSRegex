@@ -1,9 +1,9 @@
-name: ci-release-versioned
+name: ci-release-dry-run
 
 on:
   push:
     branches:
-      - feature-*
+      - bugfix-*
 
 jobs:
   deploy:
