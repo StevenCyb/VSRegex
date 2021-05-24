@@ -1,9 +1,9 @@
-name: ci-release-versioned
+name: ci-release-dry-run
 
 on:
   push:
-    tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+    branches:
+      - bugfix-*
 
 jobs:
   deploy:
@@ -17,7 +17,8 @@ jobs:
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v0
         with:
-          pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
+          dryRun: true
+          pat: ok
           registryUrl: https://marketplace.visualstudio.com
       - run: mkdir -p ./artefacts
       - run: cp ./*.vsix ./artefacts
@@ -26,4 +27,4 @@ jobs:
         with:
           name: extension
           path: ./artefacts
-          retention-days: 2
+          retention-days: 1
