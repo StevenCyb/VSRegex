@@ -17,8 +17,11 @@ jobs:
           dryRun: true
           pat: ok
           registryUrl: https://marketplace.visualstudio.com
+
+      - run: mkdir -p ./artefacts
+      - run: cp ./*.vsix ./artefacts
       - name: Archive
         uses: actions/upload-artifact@v2
         with:
           name: extension
-          path: ./
+          path: ./artefacts
