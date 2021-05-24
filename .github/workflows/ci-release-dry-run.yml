@@ -1,6 +1,9 @@
 name: ci-release-versioned
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - feature-*
 
 jobs:
   deploy:
